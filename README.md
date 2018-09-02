@@ -1,3 +1,38 @@
+# Partial Convolutions for Image Inpainting using Keras for Food Images
+This is the implementation for food image AI generation 
+
+Paper reference 
+
+[Image Inpainting for Irregular Holes Using Partial Convolutions](https://arxiv.org/abs/1804.07723)
+
+
+## Food images download
+[dataset100](http://foodcam.mobi/dataset100.html)
+[dataset256](http://foodcam.mobi/dataset256.html)
+[Food-11](https://mmspg.epfl.ch/food-image-datasets)
+[food-101](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
+[pixfood20](https://github.com/pixnet/2018-pixnet-hackathon/blob/master/opendata/pixfood20.md)
+
+
+## Training data creation
+To make the training image to 256x256 pixels, bmp is better without data-loss
+```bash
+cd command_line
+python3 generate_training.py
+```
+
+## Training
+```bash
+python3 run_training_food_img.py
+```
+
+## Prediction
+input qid from 1 to 10
+```bash
+python3 run_predict_api.py --qid 1
+```
+
+
 # Partial Convolutions for Image Inpainting using Keras
 Keras implementation of "*Image Inpainting for Irregular Holes Using Partial Convolutions*", https://arxiv.org/abs/1804.07723. A huge shoutout the authors Guilin Liu, Fitsum A. Reda, Kevin J. Shih, Ting-Chun Wang, Andrew Tao and Bryan Catanzaro from NVIDIA corporation for releasing this awesome paper, it's been a great learning experience for me to implement the architecture, the partial convolutional layer, and the loss functions. 
 

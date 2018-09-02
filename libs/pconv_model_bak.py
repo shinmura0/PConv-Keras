@@ -13,15 +13,15 @@ from libs.pconv_layer import PConv2D
 
 class PConvUnet(object):
 
-    def __init__(self, img_rows=256, img_cols=256, weight_filepath=None):
+    def __init__(self, img_rows=512, img_cols=512, weight_filepath=None):
         """Create the PConvUnet. If variable image size, set img_rows and img_cols to None"""
         
         # Settings
         self.weight_filepath = weight_filepath
         self.img_rows = img_rows
         self.img_cols = img_cols
-        assert self.img_rows >= 256, 'Height must be >=256 pixels'
-        assert self.img_cols >= 256, 'Width must be >=256 pixels'
+        assert self.img_rows >= 256, 'Height must be >256 pixels'
+        assert self.img_cols >= 256, 'Width must be >256 pixels'
 
         # Set current epoch
         self.current_epoch = 0
@@ -76,11 +76,11 @@ class PConvUnet(object):
         e_conv1, e_mask1 = encoder_layer(inputs_img, inputs_mask, 64, 7, bn=False)
         e_conv2, e_mask2 = encoder_layer(e_conv1, e_mask1, 128, 5)
         e_conv3, e_mask3 = encoder_layer(e_conv2, e_mask2, 256, 5)
-        e_conv4, e_mask4 = encoder_layer(e_conv3, e_mask3, 256, 3)
-        e_conv5, e_mask5 = encoder_layer(e_conv4, e_mask4, 256, 3)
-        e_conv6, e_mask6 = encoder_layer(e_conv5, e_mask5, 256, 3)
-        e_conv7, e_mask7 = encoder_layer(e_conv6, e_mask6, 256, 3)
-        e_conv8, e_mask8 = encoder_layer(e_conv7, e_mask7, 256, 3)
+        e_conv4, e_mask4 = encoder_layer(e_conv3, e_mask3, 512, 3)
+        e_conv5, e_mask5 = encoder_layer(e_conv4, e_mask4, 512, 3)
+        e_conv6, e_mask6 = encoder_layer(e_conv5, e_mask5, 512, 3)
+        e_conv7, e_mask7 = encoder_layer(e_conv6, e_mask6, 512, 3)
+        e_conv8, e_mask8 = encoder_layer(e_conv7, e_mask7, 512, 3)
         
         # DECODER
         def decoder_layer(img_in, mask_in, e_conv, e_mask, filters, kernel_size, bn=True):
@@ -94,10 +94,10 @@ class PConvUnet(object):
             conv = LeakyReLU(alpha=0.2)(conv)
             return conv, mask
             
-        d_conv9, d_mask9 = decoder_layer(e_conv8, e_mask8, e_conv7, e_mask7, 256, 3)
-        d_conv10, d_mask10 = decoder_layer(d_conv9, d_mask9, e_conv6, e_mask6, 256, 3)
-        d_conv11, d_mask11 = decoder_layer(d_conv10, d_mask10, e_conv5, e_mask5, 256, 3)
-        d_conv12, d_mask12 = decoder_layer(d_conv11, d_mask11, e_conv4, e_mask4, 256, 3)
+        d_conv9, d_mask9 = decoder_layer(e_conv8, e_mask8, e_conv7, e_mask7, 512, 3)
+        d_conv10, d_mask10 = decoder_layer(d_conv9, d_mask9, e_conv6, e_mask6, 512, 3)
+        d_conv11, d_mask11 = decoder_layer(d_conv10, d_mask10, e_conv5, e_mask5, 512, 3)
+        d_conv12, d_mask12 = decoder_layer(d_conv11, d_mask11, e_conv4, e_mask4, 512, 3)
         d_conv13, d_mask13 = decoder_layer(d_conv12, d_mask12, e_conv3, e_mask3, 256, 3)
         d_conv14, d_mask14 = decoder_layer(d_conv13, d_mask13, e_conv2, e_mask2, 128, 3)
         d_conv15, d_mask15 = decoder_layer(d_conv14, d_mask14, e_conv1, e_mask1, 64, 3)
