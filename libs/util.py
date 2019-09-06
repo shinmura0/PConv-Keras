@@ -21,10 +21,15 @@ def random_mask(height, width, channels=3):
         cv2.line(img,(x1,y1),(x2,y2),(1,1,1),thickness)
         
     # Draw random circles
+    #for _ in range(randint(1, 20)):
+    #    x1, y1 = randint(1, width), randint(1, height)
+    #    radius = randint(3, size)
+    #    cv2.circle(img,(x1,y1),radius,(1,1,1), -1)
+        
     for _ in range(randint(1, 20)):
         x1, y1 = randint(1, width), randint(1, height)
-        radius = randint(3, size)
-        cv2.circle(img,(x1,y1),radius,(1,1,1), -1)
+        length = randint(3, 2*size)
+        cv2.rectangle(img, (x1, y1), (x1+length, y1+length), (1, 1, 1), thickness=-1)
         
     # Draw random ellipses
     for _ in range(randint(1, 20)):
