@@ -1,7 +1,7 @@
 # Ano-Unet V2
 Visualization of abnormal parts with Unsupervised learning.
  
-The following parts have been improved with respect to [Ano-Unet]().
+The following parts have been improved with respect to [Ano-Unet](https://github.com/shinmura0/Ano-Unet).
 + Speeding up
 + No hyperparameter adjustment required
 
