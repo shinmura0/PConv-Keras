@@ -110,7 +110,7 @@ class PConvUnet(object):
         # Compile the model
         model.compile(
             optimizer = Adam(lr=lr),
-            loss=self.loss_total(inputs_mask)
+            loss="mse"#self.loss_total(inputs_mask)
         )
 
         return model
@@ -228,9 +228,9 @@ class PConvUnet(object):
         self.model = self.build_pconv_unet(train_bn, lr)
 
         # Load weights into model
-        epoch = int(os.path.basename(filepath).split("_")[0])
-        assert epoch > 0, "Could not parse weight file. Should start with 'X_', with X being the epoch"
-        self.current_epoch = epoch
+        #epoch = int(os.path.basename(filepath).split("_")[0])
+        #assert epoch > 0, "Could not parse weight file. Should start with 'X_', with X being the epoch"
+        #self.current_epoch = epoch
         self.model.load_weights(filepath)        
 
     def current_weightfile(self):
