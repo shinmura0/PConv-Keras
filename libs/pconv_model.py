@@ -27,10 +27,10 @@ class PConvUnet(object):
         self.current_epoch = 0
         
         # VGG layers to extract features from (first maxpooling layers, see pp. 7 of paper)
-        self.vgg_layers = [3, 6, 10]
+        #self.vgg_layers = [3, 6, 10]
         
         # Get the vgg16 model for perceptual loss        
-        self.vgg = self.build_vgg()
+        #self.vgg = self.build_vgg()
         
         # Create UNet-like model
         self.model = self.build_pconv_unet()
