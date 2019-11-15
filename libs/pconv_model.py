@@ -35,8 +35,6 @@ class PConvUnet(object):
         # Create UNet-like model
         self.model = self.build_pconv_unet()
         
-        return self.model
-        
     def build_vgg(self):
         """
         Load pre-trained VGG16 from keras applications
