@@ -220,6 +220,8 @@ class PConvUnet(object):
         print(self.model.summary())
 
     def save(self):        
+        model_json = self.model.to_json()
+        open('model.json', 'w').write(model_json)
         self.model.save_weights(self.current_weightfile())
 
     def load(self, filepath, train_bn=True, lr=0.0002):
